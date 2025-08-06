@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Contatos</h1><hr>
+    <h2>Adicionar contato:</h2>
+    <form action="{% url 'novo_contato' %}" method="POST">
+        {% csrf_token %}
+        <input type="text" name="nome">
+        <input type="text" name="telefone">
+        <button type="submit">Adicionar</button>
+    </form>
+    <hr>
+
+    <h2>Listar contatos:</h2>
+    <ul>
+        {% for contato in contatos %}
+            <li>{{ contato.nome }} - {{ contato.telefone }}</li>
+            <a href="{% url 'deletar_contato' contato.id %}">Deletar</a>
+        {% endfor %}
+        
+    </ul>
+</body>
+</html>
